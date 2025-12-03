@@ -40,13 +40,44 @@ app.post("/author/new", async function(req, res){
     let fName= req.body.fName;
     let lName = req.body.lName;
     let birthDate = req.body.birthDate;
+    // allow to be empty if still alive
+    let deathDate = req.body.deathDate || null;
+    let sex = req.body.sex;
+    let profession = req.body.profession;
+    let country = req.body.country;
+    let portrait = req.body.portrait;
+    let biography = req.body.biography;
+
     let sql = `
         INSERT INTO q_authors
-        (firstName, lastName, dob)
-        VALUES (?, ?, ?)`;
-    let params = [fName, lName, birthDate];
+        (firstName, lastName, dob, dod, sex, profession, country, portrait, biography)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    let params = [fName, lName, birthDate, deathDate, sex, profession, country, portrait, biography];
     const [rows] = await pool.query(sql, params);
     res.render("newAuthor", {"message": "Author added!"});
+});
+
+// new route to render list of authors
+app.get("/authors", async function (req, res) {
+    let sql = `
+        SELECT *
+        FROM q_authors
+        ORDER BY lastName`;
+    const [rows] = await pool.query(sql);
+    res.render("authorList", {"authors":rows});
+});
+
+// new route to allow editing to authors
+app.get("/author/edit", async function(req, res) {
+    let authorId = req.query.authorId;
+
+    let sqp = `
+        SELECT *,
+        DATE_FORMAT(dob, '%Y-%m-%d') dobISO
+        FROM q_authors
+        WHERE authorId = ${authorId}`;
+    const [rows] = await pool.query(sql);
+    res.render("editAuthor", {"authorInfo":rows});
 });
 
 app.get("/author/new", (req, res) => {
@@ -55,4 +86,4 @@ app.get("/author/new", (req, res) => {
 
 app.listen(3000, ()=>{
     console.log("Express server running")
-})
+});

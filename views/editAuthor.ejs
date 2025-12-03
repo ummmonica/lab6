@@ -6,13 +6,15 @@
     </head>
 
     <body>
-        <h1>Adding a new Author</h1>
+        <h1>Updating AUthor Data</h1>
 
-        <!-- Post data is for when data need to be stored -->
-        <form method = "POST" action = "/author/new">
+        <form method = "POST" action = "/author/edit">
+            <input type = "hidden" name = "authorId" value = "<%=authorInfo[0].authorId%>">
+
             First Name:
-            <input type = "text" name = "fName"><br>
+            <input type = "text" name = "fName" value = "<%=authorInfo[0].firstName%>"><br>
 
+            <!-- CONTINUE HERE -->
             Last Name:
             <input type = "text" name = "lName"><br>
 
@@ -41,16 +43,7 @@
             Biography:
             <textarea name = "biography" rows = "4" cols = "50"></textarea><br>
 
-            <button>Add Author</button>
+            <button>Edit Author</button>
         </form>
-
-        <br>
-        <!-- allow users to return to home page -->
-        <a href = "/">Home</a>
-
-        <!-- check if 'message' is not undefined (or print 'Author Added!') -->
-        <% if (typeof message != "undefined") { %>
-            <h3><%=message%></h3>
-        <% } %> 
     </body>
 </html>
