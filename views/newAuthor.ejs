@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>CRUD Operations</title>
+    </head>
+
+    <body>
+        <h1>Adding a new Author</h1>
+
+        <!-- Post data is for when data need to be stored -->
+        <form method = "POST" action = "/author/new">
+            First Name:
+            <input type = "text" name = "fName"><br>
+
+            Last Name:
+            <input type = "text" name = "lName"><br>
+
+            Date of Birth:
+            <input type = "date" name = "birthDate"><br>
+
+            <button>Add Author</button>
+        </form>
+
+        <!-- check if 'message' is not undefined (or print 'Author Added!') -->
+        <% if (typeof message != "undefined") { %>
+            <h3><%=message%></h3>
+        <% } %> 
+    </body>
+</html>
