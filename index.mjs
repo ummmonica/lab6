@@ -105,6 +105,7 @@ app.post("/author/edit", async function(req, res) {
     res.redirect("/authors");
 });
 
+// route to add new author
 app.get("/author/new", (req, res) => {
     res.render("newAuthor");
 });
@@ -119,6 +120,62 @@ app.get("/author/delete", async function(req, res) {
     const [rows] = await pool.query(sql, [authorId]);
 
     res.redirect("/authors");
+});
+
+// ~~~~~~~~ QUOTES SECTION ~~~~~~~~~~~
+
+// new route to render list of quotes
+app.get("/quotes", async function (req, res) {
+    let sql = `
+        SELECT *
+        FROM q_quotes`;
+    const [rows] = await pool.query(sql);
+    res.render("quoteList", {"quotes":rows});
+});
+
+// route to add quotes
+app.get("/quote/new", (req, res) => {
+    res.render("newQuote");
+});
+
+// route to delete quotes
+app.get("/quote/delete", async function(req, res) {
+    let quoteId = req.query.quoteId;
+    let sql = `
+        DELETE
+        FROM q_quotes
+        WHERE quoteId = ?`;
+    const [rows] = await pool.query(sql, [quoteId]);
+
+    res.redirect("/quotes");
+})
+
+// route to edit quotes
+app.get("/quote/edit", async function(req, res) {
+    let quoteId = req.query.quoteId;
+
+    let sql = `
+        SELECT *
+        FROM q_quotes
+        WHERE quoteId = ?`;
+    const [rows] = await pool.query(sql, [quoteId]);
+    res.render("editQuote", {"quoteInfo":rows});
+});
+
+// route to publish edit
+app.post("/quote/edit", async function(req, res) {
+    let sql = `
+        UPDATE q_quotes
+        SET quote = ?,
+            category = ?,
+            likes = ?
+        WHERE quoteId = ?`;
+    let params = [req.body.quote, req.body.category, 
+                req.body.likes || null,
+                req.body.quoteId
+                ];
+    const [rows] = await pool.query(sql, params);
+    res.redirect("/quotes");
 });
 
 app.listen(3000, ()=>{

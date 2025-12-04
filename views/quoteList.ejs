@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>    
+        <meta charset = "UTF-8">
+        <title>CRUD Operations</title>
+    </head>
+
+    <body>
+        <h1>Update/Delete Authors</h1>
+
+        <% for (let i = 0; i < quotes.length; i++) { %>
+            <a href = "/quote/edit?quoteId=<%=quotes[i].quoteId %>">
+                UPDATE</a>
+            
+            <a href = "/quote/delete?quoteId=<%=quotes[i].quoteId%>">
+                DELETE</a>
+            
+            <%=quotes[i].quote%>
+            <br>
+        <% } %>
+
+        <br><br>
+        <!-- allow users to return to home page -->
+        <a href = "/">Home</a>        
+    </body>
+</html>

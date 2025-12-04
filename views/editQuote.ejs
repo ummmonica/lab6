@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>CRUD Operations</title>
+    </head>
+
+    <body>
+        <h1>Updating Quote Data</h1>
+
+        <form method = "POST" action = "/quote/edit">
+            <input type = "hidden" name = "quoteId" value = "<%=quoteInfo[0].quoteId%>">
+
+            Quote:
+            <input type = "text" name = "quote" value = "<%=quoteInfo[0].quote%>"><br>
+
+            Category:
+            <input type = "text" name = "quote" value = "<%=quoteInfo[0].category%>"><br>
+
+            Likes:
+            <input type = "number" name = "quote" value = "<%=quoteInfo[0].likes%>"><br> 
+
+            <br>
+
+            <button>Edit Quote</button>
+        </form>
+
+        <br><br>
+        <!-- allow users to return to home page -->
+        <a href = "/">Home</a>        
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>CRUD Operations</title>
+    </head>
+
+    <body>
+        <h1>Adding a New Quote</h1>
+
+        <!-- Post data is for when data need to be stored -->
+        <form method = "POST" action = "/quote/new">
+            Quote:
+            <input type = "text" name = "quote"><br>
+
+            Category:
+            <input type = "text" name = "category"><br>
+
+            <!-- Number of Likes:
+            <input type = "number" name = "likes" min = "0"><br> -->
+
+            <button>Add Quote</button>
+        </form>
+
+        <br><br>
+
+        <!-- allow users to return to home page -->
+        <a href = "/">Home</a>
+
+        <!-- check if 'message' is not undefined (or print 'Author Added!') -->
+        <% if (typeof message != "undefined") { %>
+            <h3><%=message%></h3>
+        <% } %> 
+    </body>
+</html>
