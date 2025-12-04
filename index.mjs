@@ -71,12 +71,13 @@ app.get("/authors", async function (req, res) {
 app.get("/author/edit", async function(req, res) {
     let authorId = req.query.authorId;
 
-    let sqp = `
+    let sql = `
         SELECT *,
-        DATE_FORMAT(dob, '%Y-%m-%d') dobISO
+        DATE_FORMAT(dob, '%Y-%m-%d') dobISO,
+        DATE_FORMAT(dob, '%Y-%m-%d') dodISO
         FROM q_authors
-        WHERE authorId = ${authorId}`;
-    const [rows] = await pool.query(sql);
+        WHERE authorId = ?`;
+    const [rows] = await pool.query(sql, [authorId]);
     res.render("editAuthor", {"authorInfo":rows});
 });
 
