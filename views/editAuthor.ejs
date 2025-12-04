@@ -24,15 +24,15 @@
             <input type = "date" name = "deathDate" value = "<%=authorInfo[0].dodISO%>"><br>
 
             Sex:
-            <input type = "radio" name = "sex" value = "M">
+            <input type = "radio" name = "sex" value = "M"
                 <% if (authorInfo[0].sex == "M") { %>
                     checked
-                <% } %>
+                <% } %>>
             > Male
-            <input type = "radio" name = "sex" value = "F">
+            <input type = "radio" name = "sex" value = "F"
                 <% if (authorInfo[0].sex == "F") { %>
                     checked
-                <% } %>
+                <% } %>>
             > Female            
 
             <br>

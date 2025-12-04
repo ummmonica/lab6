@@ -74,11 +74,35 @@ app.get("/author/edit", async function(req, res) {
     let sql = `
         SELECT *,
         DATE_FORMAT(dob, '%Y-%m-%d') dobISO,
-        DATE_FORMAT(dob, '%Y-%m-%d') dodISO
+        DATE_FORMAT(dod, '%Y-%m-%d') dodISO
         FROM q_authors
         WHERE authorId = ?`;
     const [rows] = await pool.query(sql, [authorId]);
     res.render("editAuthor", {"authorInfo":rows});
+});
+
+// new route to publish these edits
+app.post("/author/edit", async function(req, res) {
+    let sql = `
+        UPDATE q_authors
+        SET firstName = ?,
+            lastName = ?,
+            dob = ?,
+            dod = ?,
+            sex = ?,
+            profession = ?,
+            country = ?,
+            portrait = ?,
+            biography = ?
+        WHERE authorId = ?`;
+    let params = [req.body.fName, req.body.lName, 
+                req.body.birthDate, req.body.deathDate || null,
+                req.body.sex, req.body.profession,
+                req.body.country, req.body.portrait,
+                req.body.biography, req.body.authorId,
+                ];
+    const [rows] = await pool.query(sql, params);
+    res.redirect("/authors");
 });
 
 app.get("/author/new", (req, res) => {
