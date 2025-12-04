@@ -12,13 +12,17 @@
             <input type = "hidden" name = "quoteId" value = "<%=quoteInfo[0].quoteId%>">
 
             Quote:
-            <input type = "text" name = "quote" value = "<%=quoteInfo[0].quote%>"><br>
+            <input type = "text" name = "quote" value = "<%=quoteInfo[0].quote%>" size = "50"><br>
 
             Category:
             <input type = "text" name = "quote" value = "<%=quoteInfo[0].category%>"><br>
+            <!-- <label for = "Category">Select One:</label>
+            <select name = "category" id = "category"> -->
+
+            </select>
 
             Likes:
-            <input type = "number" name = "quote" value = "<%=quoteInfo[0].likes%>"><br> 
+            <input type = "number" name = "quote" value = "<%=quoteInfo[0].likes%>" min = "0" size = "10"><br> 
 
             <br>
 

@@ -138,6 +138,21 @@ app.get("/quote/new", (req, res) => {
     res.render("newQuote");
 });
 
+// route to post new quotes
+app.post("/quote/new", async function(req, res){
+    let quote = req.body.quote;
+    let category = req.body.category;
+    let likes = req.body.likes || null;
+
+    let sql = `
+        INSERT INTO q_quotes
+        (quote, category, likes)
+        VALUES (?, ?, ?)`;
+    let params = [quote, category, likes];
+    const [rows] = await pool.query(sql, params);
+    res.render("newQuote", {"message": "Quote added!"});
+});
+
 // route to delete quotes
 app.get("/quote/delete", async function(req, res) {
     let quoteId = req.query.quoteId;
