@@ -109,6 +109,18 @@ app.get("/author/new", (req, res) => {
     res.render("newAuthor");
 });
 
+// route to delete authors
+app.get("/author/delete", async function(req, res) {
+    let authorId = req.query.authorId;
+    let sql = `
+        DELETE
+        FROM q_authors
+        WHERE authorId = ?`;
+    const [rows] = await pool.query(sql, [authorId]);
+
+    res.redirect("/authors");
+});
+
 app.listen(3000, ()=>{
     console.log("Express server running")
 });
