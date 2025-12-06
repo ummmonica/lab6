@@ -107,7 +107,7 @@ app.post("/author/edit", async function(req, res) {
 
 // route to add new author
 app.get("/author/new", (req, res) => {
-    res.render("newAuthor");
+    res.render("newAuthor", {"message": undefined});
 });
 
 // route to delete authors
@@ -127,30 +127,45 @@ app.get("/author/delete", async function(req, res) {
 // new route to render list of quotes
 app.get("/quotes", async function (req, res) {
     let sql = `
-        SELECT *
-        FROM q_quotes`;
+        SELECT q_quotes.*, q_authors.firstName, q_authors.lastName
+        FROM q_quotes
+        LEFT JOIN q_authors ON q_quotes.authorId = q_authors.authorId
+        ORDER BY q_quotes.quoteId`;
     const [rows] = await pool.query(sql);
     res.render("quoteList", {"quotes":rows});
 });
 
 // route to add quotes
-app.get("/quote/new", (req, res) => {
-    res.render("newQuote");
+app.get("/quote/new", async (req, res) => {
+    // this is added to link quote with author table
+    let sql = `
+        SELECT authorId, firstName, lastName
+        FROM q_authors
+        ORDER BY lastName, firstName`;
+    const [authors] = await pool.query(sql);
+    res.render("newQuote", {"authors": authors});
 });
 
 // route to post new quotes
 app.post("/quote/new", async function(req, res){
     let quote = req.body.quote;
+    let authorId = req.body.authorId;
     let category = req.body.category;
     let likes = req.body.likes || null;
 
     let sql = `
         INSERT INTO q_quotes
-        (quote, category, likes)
-        VALUES (?, ?, ?)`;
-    let params = [quote, category, likes];
+        (quote, authorId, category, likes)
+        VALUES (?, ?, ?, ?)`;
+    let params = [quote, authorId, category, likes];
     const [rows] = await pool.query(sql, params);
-    res.render("newQuote", {"message": "Quote added!"});
+
+    let authorSql = `
+        SELECT authorId, firstName, lastName
+        FROM q_authors
+        ORDER BY lastName, firstName`;
+    const [authors] = await pool.query(authorSql);    
+    res.render("newQuote", {"authors": authors, "message": "Quote added!"});
 });
 
 // route to delete quotes

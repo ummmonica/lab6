@@ -1,23 +1,32 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <title>CRUD Operations</title>
-    </head>
+        <%- include('partials/header') %>        
 
-    <body>
+    <div class = "list">    
         <h1>Adding a New Quote</h1>
 
         <!-- Post data is for when data need to be stored -->
         <form method = "POST" action = "/quote/new">
             Quote:
-            <input type = "text" name = "quote" size = "50"><br>
+            <input type = "text" name = "quote" size = "50"><br><br>
+
+            <label>Author:</label><br>
+            <select name = "authorId" id = "authorSelect" required>
+                <option value ="">Select</option>
+                <% for (let i = 0; i < authors.length; i++) { %>
+                <option value = "<%=authors[i].authorId%>">
+                    <%=authors[i].lastName%>, <%=authors[i].firstName%>
+                </option>
+                <% } %>
+            </select> <br><br>
+
+            <!-- opens new tab for user to add new author before adding to quote -->
+            <strong></strong>If the author can't be found, please register the new author before adding a new quote.<strong></strong><br>
+            <a href = "/author/new" target = "_blank">Add a new author</a><br><br>
 
             Category:
-            <input type = "text" name = "category"><br>
+            <input type = "text" name = "category"><br><br>
 
             Number of Likes:
-            <input type = "number" name = "likes" min = "0" size = "10"><br>
+            <input type = "number" name = "likes" min = "0"><br><br>
 
             <button>Add Quote</button>
         </form>
@@ -25,11 +34,14 @@
         <br><br>
 
         <!-- allow users to return to home page -->
-        <a href = "/">Home</a>
+        <div class="footer-links">
+            <a href="/">Home</a>
+        </div>
 
         <!-- check if 'message' is not undefined (or print 'Author Added!') -->
         <% if (typeof message != "undefined") { %>
             <h3><%=message%></h3>
         <% } %> 
-    </body>
-</html>
+    </div>
+
+        <%- include('partials/footer') %>    

@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <title>CRUD Operations</title>
-    </head>
 
-    <body>
+        <%- include('partials/header') %>
+
+    <div class = "list">        
         <h1>Updating Author Data</h1>
 
         <form method = "POST" action = "/author/edit">
@@ -54,6 +50,8 @@
 
         <br><br>
         <!-- allow users to return to home page -->
-        <a href = "/">Home</a>        
-    </body>
-</html>
+        <a href = "/">Home</a>       
+    </div>
+        
+
+        <%- include('partials/footer') %>

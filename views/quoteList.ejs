@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>    
-        <meta charset = "UTF-8">
-        <title>CRUD Operations</title>
-    </head>
+<%- include('partials/header') %>
 
-    <body>
-        <h1>Update/Delete Authors</h1>
+<h1>Update/Delete Quotes</h1>
 
-        <% for (let i = 0; i < quotes.length; i++) { %>
-            <a href = "/quote/edit?quoteId=<%=quotes[i].quoteId %>">
-                UPDATE</a>
-            
-            <a href = "/quote/delete?quoteId=<%=quotes[i].quoteId%>">
-                DELETE</a>
-            
-            <%=quotes[i].quote%>
-            <br>
-        <% } %>
+<div class="item-list">
+    <% for (let i = 0; i < quotes.length; i++) { %>
+        <div>
+            <a href="/quote/edit?quoteId=<%=quotes[i].quoteId%>">UPDATE</a>
+            <a href="/quote/delete?quoteId=<%=quotes[i].quoteId%>" class="delete">DELETE</a>
+            "<%=quotes[i].quote%>" - <%=quotes[i].firstName%> <%=quotes[i].lastName%> | Category: <%=quotes[i].category || 'N/A'%> | Likes: <%=quotes[i].likes%>
+        </div>
+    <% } %>
+</div>
 
-        <br><br>
-        <!-- allow users to return to home page -->
-        <a href = "/">Home</a>        
-    </body>
-</html>
+<div class="footer-links">
+    <a href="/">Home</a>
+</div>
+
+<%- include('partials/footer') %>

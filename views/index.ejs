@@ -1,33 +1,31 @@
-<!DOCTYPE html>
-<html lang = "en">
-	<head>
-		<meta charset = "UTF-8">
-		<title>CRUD Operations</title>
-	</head>	
+	<%- include('partials/header') %>
 
-	<body>
-		<h1> Quotes - Admin Section</h1>
+	<h1>Quotes - Admin Section</h1>
 
-		<form action = "/author/new">
+	<div class="home-buttons">
+		<form action="/author/new">
 			<button>Add Authors</button>
 		</form>
 
 		<br>
 
-		<form action = "/quote/new">
+		<form action="/quote/new">
 			<button>Add Quotes</button>
 		</form>
 
 		<br>
 
-		<form action = "/authors">
+		<form action="/authors">
 			<button>List Authors</button>
 		</form>
-		
+
 		<br>
 
-		<form action = "/quotes">
+		<form action="/quotes">
 			<button>List Quotes</button>
 		</form>
 
-	</body>
+		<br>
+	</div>
+
+	<%- include('partials/footer') %>

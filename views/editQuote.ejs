@@ -1,28 +1,24 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <title>CRUD Operations</title>
-    </head>
 
-    <body>
+    <%- include('partials/header') %>
+
+    <div class = "list">        
         <h1>Updating Quote Data</h1>
 
         <form method = "POST" action = "/quote/edit">
             <input type = "hidden" name = "quoteId" value = "<%=quoteInfo[0].quoteId%>">
 
             Quote:
-            <input type = "text" name = "quote" value = "<%=quoteInfo[0].quote%>" size = "50"><br>
+            <input type = "text" name = "quote" value = "<%=quoteInfo[0].quote%>" size = "50"><br><br>
 
             Category:
-            <input type = "text" name = "quote" value = "<%=quoteInfo[0].category%>"><br>
+            <input type = "text" name = "quote" value = "<%=quoteInfo[0].category%>"><br><br>
             <!-- <label for = "Category">Select One:</label>
             <select name = "category" id = "category"> -->
 
-            </select>
+            <!-- </select> -->
 
             Likes:
-            <input type = "number" name = "quote" value = "<%=quoteInfo[0].likes%>" min = "0" size = "10"><br> 
+            <input type = "number" name = "quote" value = "<%=quoteInfo[0].likes%>" min = "0" size = "10"><br><br> 
 
             <br>
 
@@ -31,6 +27,10 @@
 
         <br><br>
         <!-- allow users to return to home page -->
-        <a href = "/">Home</a>        
-    </body>
-</html>
+        <div class="footer-links">
+            <a href="/">Home</a>
+        </div>   
+    </div>
+
+    <%- include('partials/footer') %>
+

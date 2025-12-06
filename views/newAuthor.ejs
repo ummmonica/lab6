@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <title>CRUD Operations</title>
-    </head>
 
-    <body>
+        <%- include('partials/header') %>
+
+    <div class = "list"></div>    
         <h1>Adding a New Author</h1>
 
         <!-- Post data is for when data need to be stored -->
@@ -44,11 +40,14 @@
 
         <br><br>
         <!-- allow users to return to home page -->
-        <a href = "/">Home</a>
+        <div class="footer-links">
+            <a href="/">Home</a>
+        </div>
 
         <!-- check if 'message' is not undefined (or print 'Author Added!') -->
         <% if (typeof message != "undefined") { %>
             <h3><%=message%></h3>
         <% } %> 
-    </body>
-</html>
+    </div>
+
+        <%- include('partials/footer') %>
